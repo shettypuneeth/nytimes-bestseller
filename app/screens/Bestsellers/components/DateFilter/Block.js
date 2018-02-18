@@ -7,21 +7,22 @@ type Props = {
   active: bool,
   disabled?: bool,
   handlePress: Function,
-  stateKey: string,
   blockId: string | number,
   value: number
 };
+
+const getFontColor = (disabled) => disabled ? '#95a5a6' : '#ecf0f1';
 
 const StyledContainer = styled.TouchableOpacity`
   padding: 15px 0px;
   width: 50px;
   padding-bottom: ${props => props.active ? '11px' : '15px'};
   border-bottom-width: ${props => props.active ? '4px' : '0px'};
-  border-bottom-color: #f1c40f;
+  border-bottom-color: #FFD700;
 `;
 const StyledValue = styled.Text`
   text-align: center;
-  color: ${props => props.active ? '#f1c40f' : '#fff' };
+  color: ${props => props.active ? '#FFD700' : getFontColor(props.disabled) };
 `;
 
 class Block extends PureComponent<Props> {
@@ -33,22 +34,20 @@ class Block extends PureComponent<Props> {
 
   _handlePress() {
     const {
-      stateKey,
       disabled,
       handlePress,
       blockId
     } = this.props;
 
     if (!disabled) {
-      handlePress({
-        [stateKey]: blockId
-      });
+      handlePress(blockId);
     }
   }
 
   render() {
     const {
       active,
+      disabled,
       handlePress,
       value
     } = this.props;
@@ -58,7 +57,10 @@ class Block extends PureComponent<Props> {
         active={active}
         onPress={this._handlePress}
       >
-        <StyledValue active={active}>
+        <StyledValue
+          active={active}
+          disabled={disabled}
+        >
           { value }
         </StyledValue>
       </StyledContainer>

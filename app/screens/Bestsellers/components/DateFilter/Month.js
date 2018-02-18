@@ -50,7 +50,6 @@ const Month = (props: Props) => {
               disabled={m > currentMonth}
               handlePress={handleSelection}
               key={m}
-              stateKey='activeMonth'
               value={MONTH_NAME_MAP[m]}
             />
           ))

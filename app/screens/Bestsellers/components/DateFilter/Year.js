@@ -37,7 +37,6 @@ const Year = (props: Props) => {
               blockId={m}
               handlePress={handleSelection}
               key={m}
-              stateKey='activeYear'            
               value={m}
             />
           ))

@@ -7,64 +7,34 @@ import PropTypes from 'prop-types';
 
 import Cover from './components/Cover';
 import DateFilter from './components/DateFilter';
+import BookList from './components/BookList';
 
 type Props = {
   navigation: {
-    navigate: Object
+    navigate: Function
   }
 };
-type State = {
-  isLoading: boolean,
-  error: Object | null,
-  bestsellers: Array<Object>,
-};
 
-class Bestsellers extends Component<Props, State> {
+class Bestsellers extends Component<Props> {
   handleItemPress: Function;
-  _fetchItems: Function;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      isLoading: false,
-      bestsellers: [],
-      error: null
-    };
+  constructor() {
+    super();
     this.handleItemPress = this.handleItemPress.bind(this);
-    this._fetchItems = this._fetchItems.bind(this);
   }
-
-  _fetchItems(options: Object): void {
-    this.setState({
-      isLoading: true
-    });
-  }
-
-  componentDidMount() {
-    const options = {
-    };
-
-    this._fetchItems(options);
-  }
-
-  componentDidUpdate(prevProps: Props, prevState: State) {
-    // this._fetchItems({});
-  }
-
-  handleItemPress(artwork: Object): void {
+  
+  handleItemPress(isbn: Object): void {
     const { navigate } = this.props.navigation;
+    navigate('Details');
   }
   
   render() {
     return (
       <View style={{flex: 1}}>
         <Cover />
-        <DateFilter
-          selectedMonth={0}
-          selectedYear={2018}
-          handleSelection={() => {}}
-        />
+
+        <DateFilter />
+
+        <BookList onPress={this.handleItemPress} />
       </View>
     );
   }

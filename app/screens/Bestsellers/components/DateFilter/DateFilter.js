@@ -1,38 +1,52 @@
 // @flow
 import React, { Component } from 'react';
-import styled from 'styled-components/native';
+import { View } from 'react-native';
+import { observer, inject } from 'mobx-react';
+
+import { mapDateFilterStateToProps } from '../../../../stores/mappers';
 
 import Month from './Month';
 import Year from './Year';
 
 type Props = {
+  fetchBooks: Function,
   selectedMonth: number,
   selectedYear: number,
-  handleSelection: Function
+  setMonth: Function,
+  setYear: Function
 };
 
-const StyledContainer = styled.View`
-`;
-
+@inject(mapDateFilterStateToProps)
+@observer
 class DateNavigator extends Component<Props> {
+  componentDidUpdate(prevProps: Props) {
+    if (
+      this.props.selectedMonth !== prevProps.selectedMonth ||
+      this.props.selectedYear !== prevProps.selectedYear
+    ) {
+      this.props.fetchBooks();
+    }
+  }
+  
   render() {
     const {
       selectedYear,
       selectedMonth,
-      handleSelection
+      setMonth,
+      setYear
     } = this.props;
 
     return (
-      <StyledContainer>
+      <View>
         <Month
           selectedMonth={selectedMonth}
-          handleSelection={handleSelection}
+          handleSelection={setMonth}
         />
         <Year
           selectedYear={selectedYear}
-          handleSelection={handleSelection}
+          handleSelection={setYear}
         />
-      </StyledContainer>
+      </View>
     );
   }
 }
