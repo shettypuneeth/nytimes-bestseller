@@ -1,10 +1,11 @@
 // @flow
 
 // Place your API_KEY here
-// You can get it from: 
-//  https://docs.google.com/forms/d/e/1FAIpQLSfkmEBqH76HLMMiCC-GPPnhcvHC9aJS86E32dOd0Z8MpY2rvQ/viewform
+
+// Get it from: https://console.developers.google.com
 export const GOOGLE_BOOKS_API_KEY = '';
 
+// Get it from https://developer.nytimes.com/signup
 export const NY_TIMES_API_KEY = '';
 
 export const GOOGLE_BOOKS_BASE_URL = 'https://www.googleapis.com/books/v1/volumes';

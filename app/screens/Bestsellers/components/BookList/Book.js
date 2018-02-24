@@ -36,7 +36,7 @@ const WeeksOnList = styled.Text`
 `;
 const StyledTitle = styled.Text`
   color: #2c3e50;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 600;
 `;
 const SubTextContainer = styled.View`

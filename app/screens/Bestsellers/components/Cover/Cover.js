@@ -11,7 +11,7 @@ const StyledContainer = styled.View`
   background-color: #95a5a6;
 `;
 const StyledImage = styled.Image`
-  height: 250;
+  height: 210;
   width: auto;
 `;
 const ForegroundContainer = styled.View`
@@ -25,7 +25,7 @@ const ForegroundContainer = styled.View`
 `;
 const TitleContainer = styled.View`
   width: 100%;
-  padding: 12px 0;
+  padding: 5px 0;
   background: rgba(255, 255, 255, 0.87);
 `;
 const StyledTitle = styled.Text`
