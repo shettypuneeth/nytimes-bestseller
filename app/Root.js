@@ -16,7 +16,9 @@ import { BookStore } from './stores/BookStore';
 
 const books = BookStore.create({
   books: {},
-  imageCache: {}
+  imageCache: {
+    'test': {'a': 'dd'}
+  }
 });
 
 type Props = {};

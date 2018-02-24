@@ -12,7 +12,7 @@ type Options = {
 
 const DEFAULT_PARAMS = {
   list: 'hardcover-fiction',
-  'sort-order': 'DESC'
+  'sort-order': 'ASC'
 };
 
 // Parse the API response

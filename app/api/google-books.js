@@ -6,10 +6,19 @@ import { getRequest } from '../utils/requests';
 function parseApiResponse(response) {
   if (!response || !response.items) return '';
 
-  let thumbnail = response.items[0].volumeInfo.imageLinks.thumbnail;
-  thumbnail = thumbnail.replace(/^http:\/\//i, 'https://');
+  let imageLinks = response.items[0].volumeInfo.imageLinks;
+  let {
+    thumbnail,
+    smallThumbnail
+  } = imageLinks;
 
-  return thumbnail;
+  thumbnail = thumbnail.replace(/^http:\/\//i, 'https://');
+  smallThumbnail = smallThumbnail.replace(/^http:\/\//i, 'https://');
+
+  return {
+    thumbnail,
+    smallThumbnail
+  };
 }
 
 export function fetchBookCoverUrl(isbn: string) {

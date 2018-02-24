@@ -21,6 +21,7 @@ type Props = {
   isLoading: bool,
   onPress: Function,
   imageCache: Object,
+  selectBook: Function,
   updateCover: Function
 };
 
@@ -50,14 +51,15 @@ class BookList extends Component<Props> {
   }
   
   _renderBook({ item, index }: { item: Object, index: number }) {
-    const coverImageUrl = this.props.imageCache.get(item.id);
+    const imageLinks = this.props.imageCache.get(item.id);
+    const url = imageLinks ? imageLinks.get('smallThumbnail') : '';
 
     return (
       <Book
         book={item}
         key={item.id}
         index={index}
-        coverImageUrl={coverImageUrl}
+        coverImageUrl={url}
         handlePress={this.handlePress}
         updateCover={this.updateCover}
       />
@@ -71,8 +73,9 @@ class BookList extends Component<Props> {
   }
 
   handlePress(id: string) {
-    const { onPress } = this.props;
-
+    const { onPress, selectBook } = this.props;
+    
+    selectBook(id);
     onPress(id);
   }
 
@@ -94,7 +97,7 @@ class BookList extends Component<Props> {
     return (
       <StyledList>
         <FlatList
-          data={[books[0]]}
+          data={[books[0], books[1]]}
           initialNumToRender={5}
           extraData={imageCache}
           keyExtractor={item => item.id}

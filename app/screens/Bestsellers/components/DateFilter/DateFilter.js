@@ -40,6 +40,7 @@ class DateNavigator extends Component<Props> {
       <View>
         <Month
           selectedMonth={selectedMonth}
+          selectedYear={selectedYear}
           handleSelection={setMonth}
         />
         <Year

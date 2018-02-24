@@ -35,7 +35,8 @@ const Book = types.model({
 export const BookStore = types
   .model("BookStore", {
     isLoading: false,
-    imageCache: types.optional(types.map(types.string), {}),
+    imageCache: types.optional(types.map(types.map(types.string)), {'test': {'a': 'dd'}}),
+    selectedBookId: types.optional(types.string, ''),
     error: types.optional(types.string, ''),
     activeMonth: getCurrentMonth(),
     activeYear: getCurrentYear(),
@@ -54,6 +55,12 @@ export const BookStore = types
 
       return [];
     },
+    get selectedBook() {
+      if (!self.selectedBookId) return null;
+      if (!self.books.has(self.selectedBookId)) return null;
+
+      return self.books.get(self.selectedBookId);
+    },
     get coverImageCache() {
       return self.imageCache;
     }
@@ -67,7 +74,7 @@ export const BookStore = types
       return self.bookIdMapping.has(key);
     }
 
-    const fetchBooks = flow(function * fetchBooks() {
+    const fetchBooks = flow(function* fetchBooks() {
       // check if the books are loaded for the current date filter
       const key = getCacheKey(self.activeYear, self.activeMonth);      
       if (isCached(key)) return;
@@ -92,13 +99,14 @@ export const BookStore = types
       }
     });
 
-    const updateCover = flow(function * updateCover(isbn) {
+    const updateCover = flow(function* updateCover(isbn) {
       try {
         if (self.imageCache.has(isbn)) return;
 
-        const url = yield fetchBookCoverUrl(isbn);
+        const imageLinks = yield fetchBookCoverUrl(isbn);
 
-        self.imageCache.set(isbn, url);
+        self.imageCache.set(isbn, imageLinks);
+        self.imageCache.set('test', {});
       } catch (err) {
         self.error = 'Error loading image url';
       }
@@ -112,6 +120,10 @@ export const BookStore = types
       self.activeYear = year;
     }
 
+    function selectBook(id) {
+      self.selectedBookId = id;
+    }
+
     function afterCreate() {
       self.fetchBooks();
     }
@@ -119,6 +131,7 @@ export const BookStore = types
     return {
       afterCreate,
       fetchBooks,
+      selectBook,
       setMonth,
       setYear,
       updateCover

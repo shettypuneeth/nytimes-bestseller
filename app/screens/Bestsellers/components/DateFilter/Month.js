@@ -13,6 +13,7 @@ const StyledMonth = styled.View`
 
 type Props = {
   selectedMonth: number,
+  selectedYear: number,
   handleSelection: Function
 };
 
@@ -35,10 +36,12 @@ const MONTH_NAME_MAP = {
 const Month = (props: Props) => {
   const {
     handleSelection,
+    selectedYear,
     selectedMonth
   } = props;
   const currentMonth = (new Date()).getMonth();
-  
+  const currentYear = (new Date()).getFullYear();
+
   return (
     <ScrollView horizontal={true}>
       <StyledMonth>
@@ -47,7 +50,7 @@ const Month = (props: Props) => {
             <Block 
               active={m === selectedMonth}
               blockId={m}
-              disabled={m > currentMonth}
+              disabled={selectedYear === currentYear && m > currentMonth}
               handlePress={handleSelection}
               key={m}
               value={MONTH_NAME_MAP[m]}

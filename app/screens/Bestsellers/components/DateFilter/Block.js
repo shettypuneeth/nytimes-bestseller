@@ -54,6 +54,7 @@ class Block extends PureComponent<Props> {
   
     return (
       <StyledContainer
+        disabled={disabled}
         active={active}
         onPress={this._handlePress}
       >
