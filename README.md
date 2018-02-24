@@ -19,10 +19,13 @@ $ yarn install
 $ npm install
 ```
 
-### Get the key for NY times and Google Books API service.
+## Get the key for NY times and Google Books API service.
 
-Get a NY Times API key from: https://developer.nytimes.com/signup
-Get a Google Books API key: https://developers.google.com/books/docs/v1/using
+### NY Times
+Get a key from: https://developer.nytimes.com/signup
+
+#### Google Books API
+Get a key from: https://developers.google.com/books/docs/v1/using
   1. Open [Credentials Page](https://console.developers.google.com/apis/credentials?project=_)
   2. Create a new credential by choosing Create credentials and choose API key from the dropdown
   3. Go to the [API dashboard](https://console.developers.google.com/apis/dashboard) and Enable Google Books API service.
