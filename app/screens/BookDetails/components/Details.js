@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { Linking, Button } from 'react-native';
 import styled from 'styled-components/native';
 
 type Props = {
@@ -45,6 +46,14 @@ const Detail = ({title, content}: any) => (
   </DetailContainer>
 )
 
+const handleClick = (url: string) => {
+  Linking.canOpenURL(url).then(supported => {
+    if (supported) {
+      Linking.openURL(url);
+    } 
+  });
+};
+
 const Details = ({ book }: Props) => {
   return (
     <Container>
@@ -66,6 +75,8 @@ const Details = ({ book }: Props) => {
         title='Rank Previous Week'
         content={book.rankLastWeek}
       />
+
+      <Button title='Buy' onPress={() => handleClick(book.amazonUrl)} />
     </Container>
   );
 };

@@ -21,16 +21,23 @@ const StyledContainer = styled.TouchableOpacity`
   padding: 15px;
 `;
 const StyledRank = styled.Text`
+  color: #f39c12;
+  font-weight: 700;
+  font-size: 24px;
+  margin-right: 18px;
+  margin-left: 5px;
 `;
-
 const MetaContainer = styled.View`
   flex: 1;
+`;
+const WeeksOnList = styled.Text`
+  color: #7f8c8d;
+  font-size: 12px;
 `;
 const StyledTitle = styled.Text`
   color: #2c3e50;
   font-size: 18px;
   font-weight: 600;
-  margin-bottom: 2px;
 `;
 const SubTextContainer = styled.View`
   flex-direction: row;
@@ -44,6 +51,7 @@ const StyledSubText = styled.Text`
 class Book extends PureComponent<Props> {
   render() {
     const {
+      index,
       book,
       coverImageUrl,
       handlePress,
@@ -52,13 +60,14 @@ class Book extends PureComponent<Props> {
 
     return (
       <StyledContainer onPress={() => handlePress(book.id)}>
-        <Thumbnail 
-          id={book.id}
-          updateCover={updateCover}
-          coverImageUrl={coverImageUrl} 
-        />
-
+        <StyledRank>
+          { index + 1 }
+        </StyledRank>
         <MetaContainer>
+          <WeeksOnList numberOfLines={1}>
+             {`${book.weeksOnList} ${book.weeksOnList > 1 ? 'WEEKS' : 'WEEK'} ON LIST`}
+          </WeeksOnList>
+
           <StyledTitle>
             { book.title }
           </StyledTitle>
@@ -69,6 +78,12 @@ class Book extends PureComponent<Props> {
             </StyledSubText>
           </SubTextContainer>
         </MetaContainer>
+
+        <Thumbnail 
+          id={book.id}
+          updateCover={updateCover}
+          coverImageUrl={coverImageUrl} 
+        />
       </StyledContainer>
     );
   }

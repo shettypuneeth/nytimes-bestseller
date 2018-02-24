@@ -18,6 +18,7 @@ import Book from './Book';
 
 type Props = {
   books: Array<Object>,
+  cacheObserver: any,
   isLoading: bool,
   onPress: Function,
   imageCache: Object,
@@ -81,9 +82,9 @@ class BookList extends Component<Props> {
 
   render() {
     const {
+      cacheObserver,
       isLoading,
       books,
-      imageCache
     } = this.props;
 
     if (isLoading) {
@@ -97,9 +98,9 @@ class BookList extends Component<Props> {
     return (
       <StyledList>
         <FlatList
-          data={[books[0], books[1]]}
+          data={books}
+          extraData={cacheObserver}
           initialNumToRender={5}
-          extraData={imageCache}
           keyExtractor={item => item.id}
           ItemSeparatorComponent={this._renderSeparator}
           maxToRenderPerBatch={5}

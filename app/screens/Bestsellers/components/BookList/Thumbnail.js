@@ -43,9 +43,9 @@ export default Thumbnail;
 
 const styles = StyleSheet.create({
   image: {
-    width: 50,
-    height: 50,
-    marginRight: 10,  
+    width: 55,
+    height: 55,
+    // marginRight: 10,  
     borderRadius: 3,
     overflow: 'hidden'
   }
